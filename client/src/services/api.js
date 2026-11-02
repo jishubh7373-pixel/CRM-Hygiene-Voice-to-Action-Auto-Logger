@@ -1,6 +1,11 @@
-const BASE_URL = '/api/v1';
+const API_ORIGIN = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/\/$/, '') : '';
+const BASE_URL = `${API_ORIGIN}/api/v1`;
 
 class ApiClient {
+  static getBaseUrl() {
+    return BASE_URL;
+  }
+
   static getAccessToken() {
     return localStorage.getItem('dealflow_access_token');
   }

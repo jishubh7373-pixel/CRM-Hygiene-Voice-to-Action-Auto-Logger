@@ -25,7 +25,8 @@ export const SocketProvider = ({ children }) => {
     const token = ApiClient.getAccessToken();
     if (!token) return;
 
-    const s = io('/', {
+    const socketOrigin = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL || '/';
+    const s = io(socketOrigin, {
       auth: { token },
       transports: ['websocket', 'polling'],
       reconnection: true,

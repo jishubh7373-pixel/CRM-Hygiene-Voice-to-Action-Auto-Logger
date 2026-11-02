@@ -14,7 +14,7 @@ const AudioPlayer = ({ meetingId, seekTime, onTimeUpdate }) => {
 
   // Stream URL with token for authenticated audio element
   const token = ApiClient.getAccessToken();
-  const audioSrc = `/api/v1/meetings/${meetingId}/audio?token=${encodeURIComponent(token || '')}`;
+  const audioSrc = `${ApiClient.getBaseUrl()}/meetings/${meetingId}/audio?token=${encodeURIComponent(token || '')}`;
 
   useEffect(() => {
     if (seekTime !== null && seekTime !== undefined && audioRef.current) {
