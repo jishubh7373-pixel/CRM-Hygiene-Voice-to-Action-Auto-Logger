@@ -1,12 +1,13 @@
 import React from 'react';
-import { LogOut, Activity, Building, UserCheck } from 'lucide-react';
+import { LogOut, Activity, Building, UserCheck, Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-const Topbar = () => {
+const Topbar = ({ onToggleMobileNav }) => {
   const { user, organization, logout } = useAuth();
 
   return (
     <header
+      className="topbar-container"
       style={{
         height: 'var(--topbar-height)',
         background: 'var(--bg-app)',
@@ -22,8 +23,18 @@ const Topbar = () => {
       }}
     >
       {/* System Telemetry & Isolation Status */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <button
+          type="button"
+          onClick={onToggleMobileNav}
+          className="mobile-nav-toggle"
+          aria-label="Toggle navigation menu"
+        >
+          <Menu size={20} />
+        </button>
+
         <div
+          className="topbar-desktop-badge"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -49,7 +60,7 @@ const Topbar = () => {
           <span>Auto-Logger Operational</span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-dim)', fontSize: '0.8rem' }}>
+        <div className="topbar-domain-info" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-dim)', fontSize: '0.8rem' }}>
           <Building size={14} />
           <span>Domain: <strong>{organization?.domain}</strong></span>
         </div>

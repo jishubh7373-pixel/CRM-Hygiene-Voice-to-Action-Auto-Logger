@@ -229,3 +229,124 @@ input::placeholder, textarea::placeholder {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-dim);
 }
+
+/* ==========================================================================
+   Responsive Layout & Mobile Adaptability
+   ========================================================================== */
+.app-main-wrapper {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: margin-left 0.25s ease;
+}
+
+.app-sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  margin-right: 0.75rem;
+}
+
+.mobile-nav-toggle:hover {
+  background: var(--bg-card-hover);
+}
+
+.mobile-backdrop {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .app-main-wrapper {
+    margin-left: 0 !important;
+  }
+
+  .app-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .app-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .mobile-sidebar-close {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  .mobile-backdrop.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 45;
+  }
+
+  .app-content-area {
+    padding: 1.25rem !important;
+  }
+
+  .topbar-desktop-badge {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-content-area {
+    padding: 0.85rem !important;
+  }
+
+  .card {
+    padding: 1rem !important;
+  }
+
+  .topbar-container {
+    padding: 0 1rem !important;
+  }
+
+  .topbar-domain-info {
+    display: none !important;
+  }
+
+  .page-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+
+  .responsive-grid-1col {
+    grid-template-columns: 1fr !important;
+  }
+}

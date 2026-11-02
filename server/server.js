@@ -21,6 +21,19 @@ const startServer = async () => {
     // 1. Connect to MongoDB
     try {
       await connectDB();
+      // Auto-seed if database is empty (e.g. initial cloud cluster deploy)
+      try {
+        const User = require('./src/models/User');
+        const userCount = await User.countDocuments();
+        if (userCount === 0) {
+          logger.info('Database has 0 users. Auto-seeding initial demo records...');
+          const { populateDatabase } = require('./seed');
+          await populateDatabase();
+          logger.info('Auto-seeding completed successfully.');
+        }
+      } catch (seedErr) {
+        logger.warn(`Auto-seed check notice: ${seedErr.message}`);
+      }
     } catch (dbErr) {
       if (config.env === 'development') {
         logger.warn(`External MongoDB daemon not reached at ${config.mongo.uri}.`);

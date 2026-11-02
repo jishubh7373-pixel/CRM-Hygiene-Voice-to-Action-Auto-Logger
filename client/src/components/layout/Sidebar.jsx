@@ -9,10 +9,11 @@ import {
   Settings,
   ShieldCheck,
   Zap,
+  X,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-const Sidebar = () => {
+const Sidebar = ({ mobileOpen, onClose }) => {
   const { user, organization } = useAuth();
 
   const navItems = [
@@ -27,17 +28,10 @@ const Sidebar = () => {
 
   return (
     <aside
+      className={`app-sidebar ${mobileOpen ? 'mobile-open' : ''}`}
       style={{
-        width: 'var(--sidebar-width)',
-        height: '100vh',
         background: 'var(--bg-sidebar)',
         borderRight: '1px solid var(--border-subtle)',
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        zIndex: 50,
       }}
     >
       {/* Brand Header */}
@@ -73,6 +67,15 @@ const Sidebar = () => {
             CRM Auto-Logger
           </p>
         </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="mobile-sidebar-close"
+          style={{ display: 'none', marginLeft: 'auto' }}
+          aria-label="Close navigation"
+        >
+          <X size={20} />
+        </button>
       </div>
 
       {/* Tenant Scope Card */}
@@ -119,6 +122,9 @@ const Sidebar = () => {
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={() => {
+                if (onClose) onClose();
+              }}
               style={({ isActive }) => ({
                 display: 'flex',
                 alignItems: 'center',
