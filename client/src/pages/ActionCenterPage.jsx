@@ -152,12 +152,13 @@ const ActionCenterPage = () => {
 
       {/* Filter Bar */}
       <div className="card filter-toolbar">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Filter size={16} style={{ color: 'var(--text-dim)' }} />
+        <div className="filter-group has-icon">
+          <Filter size={16} className="filter-group-icon" />
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            style={{ width: 'auto', minWidth: 140 }}
+            className="filter-select"
+            aria-label="Filter by status"
           >
             <option value="">All Statuses</option>
             <option value="pending">Pending</option>
@@ -166,31 +167,39 @@ const ActionCenterPage = () => {
           </select>
         </div>
 
-        <select
-          value={priorityFilter}
-          onChange={(e) => setPriorityFilter(e.target.value)}
-          style={{ width: 'auto', minWidth: 140 }}
-        >
-          <option value="">All Priorities</option>
-          <option value="urgent">Urgent</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
+        <div className="filter-group">
+          <select
+            value={priorityFilter}
+            onChange={(e) => setPriorityFilter(e.target.value)}
+            className="filter-select"
+            aria-label="Filter by priority"
+          >
+            <option value="">All Priorities</option>
+            <option value="urgent">Urgent</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
 
-        <select
-          value={partyFilter}
-          onChange={(e) => setPartyFilter(e.target.value)}
-          style={{ width: 'auto', minWidth: 160 }}
-        >
-          <option value="">All Responsible Parties</option>
-          <option value="internal">Internal Actions</option>
-          <option value="customer">Customer Deliverables</option>
-        </select>
+        <div className="filter-group">
+          <select
+            value={partyFilter}
+            onChange={(e) => setPartyFilter(e.target.value)}
+            className="filter-select"
+            aria-label="Filter by responsible party"
+          >
+            <option value="">All Responsible Parties</option>
+            <option value="internal">Internal Actions</option>
+            <option value="customer">Customer Deliverables</option>
+          </select>
+        </div>
 
-        <button onClick={fetchActions} className="btn btn-secondary btn-sm" title="Refresh">
-          <RefreshCw size={14} />
-        </button>
+        <div className="filter-actions">
+          <button onClick={fetchActions} className="btn btn-secondary btn-sm" title="Refresh">
+            <RefreshCw size={14} />
+          </button>
+        </div>
       </div>
 
       {/* Action Items List */}

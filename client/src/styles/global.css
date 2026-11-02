@@ -31,7 +31,7 @@ button {
   outline: none;
 }
 
-input, select, textarea {
+input, select, textarea, .input-field {
   font-family: inherit;
   font-size: 0.925rem;
   color: var(--text-main);
@@ -44,7 +44,7 @@ input, select, textarea {
   width: 100%;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus, select:focus, textarea:focus, .input-field:focus {
   border-color: var(--primary);
   background: var(--bg-input-focus);
   box-shadow: 0 0 0 3px var(--primary-subtle);
@@ -52,6 +52,24 @@ input:focus, select:focus, textarea:focus {
 
 input::placeholder, textarea::placeholder {
   color: var(--text-dim);
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 0.75rem) center;
+  background-size: 1rem;
+  padding-right: 2.25rem !important;
+  cursor: pointer;
+}
+
+select option {
+  background: #0f172a;
+  color: #f1f5f9;
+  padding: 0.5rem;
 }
 
 /* Base Component Styles */
@@ -371,12 +389,62 @@ input::placeholder, textarea::placeholder {
   flex-wrap: wrap;
 }
 
-/* Responsive Filter Toolbar */
+/* Responsive Filter Toolbar System */
 .filter-toolbar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  padding: 0.85rem 1.25rem;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1 1 170px;
+  min-width: 140px;
+}
+
+.filter-group-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.filter-group.has-icon select,
+.filter-group.has-icon input {
+  padding-left: 2.35rem !important;
+}
+
+.filter-search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 2 1 240px;
+  min-width: 200px;
+}
+
+.filter-search input {
+  padding-left: 2.35rem !important;
+  width: 100%;
+}
+
+.filter-select {
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
 }
 
 /* Responsive Action Card Row */
@@ -469,13 +537,29 @@ input::placeholder, textarea::placeholder {
     font-size: 0.8rem !important;
   }
 
+  .filter-toolbar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.65rem !important;
+    padding: 0.85rem !important;
+  }
+
   .filter-toolbar > form,
   .filter-toolbar > div,
   .filter-toolbar > select,
-  .filter-toolbar > input {
+  .filter-toolbar > input,
+  .filter-group,
+  .filter-search {
     width: 100% !important;
     min-width: 100% !important;
     flex: 1 1 100% !important;
+  }
+
+  .filter-actions {
+    margin-left: 0 !important;
+    width: 100% !important;
+    justify-content: flex-end !important;
   }
 }
 

@@ -189,26 +189,23 @@ const MeetingsPage = () => {
 
       {/* Filters Bar */}
       <div className="card filter-toolbar">
-        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', flex: 1, minWidth: 260, position: 'relative' }}>
+        <form onSubmit={handleSearchSubmit} className="filter-search">
+          <Search size={16} className="filter-group-icon" />
           <input
             type="text"
             placeholder="Search meetings by title or client account..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            style={{ paddingLeft: '2.4rem' }}
-          />
-          <Search
-            size={16}
-            style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }}
           />
         </form>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Filter size={16} style={{ color: 'var(--text-dim)' }} />
+        <div className="filter-group has-icon">
+          <Filter size={16} className="filter-group-icon" />
           <select
             value={platform}
             onChange={(e) => setPlatform(e.target.value)}
-            style={{ width: 'auto', minWidth: 150 }}
+            className="filter-select"
+            aria-label="Filter by platform"
           >
             <option value="">All Platforms</option>
             <option value="upload">Audio Upload</option>
@@ -219,9 +216,11 @@ const MeetingsPage = () => {
           </select>
         </div>
 
-        <button onClick={() => fetchMeetings()} className="btn btn-secondary btn-sm" title="Refresh">
-          <RefreshCw size={14} />
-        </button>
+        <div className="filter-actions">
+          <button onClick={() => fetchMeetings()} className="btn btn-secondary btn-sm" title="Refresh">
+            <RefreshCw size={14} />
+          </button>
+        </div>
       </div>
 
       {/* Meetings Table */}

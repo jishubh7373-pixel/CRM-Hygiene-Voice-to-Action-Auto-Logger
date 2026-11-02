@@ -20,6 +20,7 @@ import {
   Layers,
   Sparkles,
   Info,
+  RefreshCw,
 } from 'lucide-react';
 import ApiClient from '../services/api';
 import Badge from '../components/common/Badge';
@@ -360,41 +361,49 @@ const ApprovalCenterPage = () => {
 
       {/* Filter Bar */}
       <div className="card filter-toolbar">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '220px' }}>
-          <Search size={15} style={{ color: 'var(--text-dim)' }} />
+        <div className="filter-search">
+          <Search size={16} className="filter-group-icon" />
           <input
             type="text"
             placeholder="Search proposals by title, record, or keywords..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && fetchActions()}
-            className="input-field"
-            style={{ padding: '0.35rem 0.6rem', fontSize: '0.8rem' }}
           />
         </div>
 
-        <select
-          value={providerFilter}
-          onChange={(e) => setProviderFilter(e.target.value)}
-          className="input-field"
-          style={{ width: 'auto', padding: '0.35rem 0.6rem', fontSize: '0.8rem' }}
-        >
-          <option value="">All Providers</option>
-          <option value="hubspot">HubSpot CRM</option>
-          <option value="jira">Atlassian Jira</option>
-        </select>
+        <div className="filter-group">
+          <select
+            value={providerFilter}
+            onChange={(e) => setProviderFilter(e.target.value)}
+            className="filter-select"
+            aria-label="Filter by provider"
+          >
+            <option value="">All Providers</option>
+            <option value="hubspot">HubSpot CRM</option>
+            <option value="jira">Atlassian Jira</option>
+          </select>
+        </div>
 
-        <select
-          value={riskFilter}
-          onChange={(e) => setRiskFilter(e.target.value)}
-          className="input-field"
-          style={{ width: 'auto', padding: '0.35rem 0.6rem', fontSize: '0.8rem' }}
-        >
-          <option value="">All Risk Levels</option>
-          <option value="high">High Risk (Deal Commercials)</option>
-          <option value="medium">Medium Risk (Jira Tasks)</option>
-          <option value="low">Low Risk (Notes)</option>
-        </select>
+        <div className="filter-group">
+          <select
+            value={riskFilter}
+            onChange={(e) => setRiskFilter(e.target.value)}
+            className="filter-select"
+            aria-label="Filter by risk level"
+          >
+            <option value="">All Risk Levels</option>
+            <option value="high">High Risk (Deal Commercials)</option>
+            <option value="medium">Medium Risk (Jira Tasks)</option>
+            <option value="low">Low Risk (Notes)</option>
+          </select>
+        </div>
+
+        <div className="filter-actions">
+          <button onClick={fetchActions} className="btn btn-secondary btn-sm" title="Refresh">
+            <RefreshCw size={14} />
+          </button>
+        </div>
       </div>
 
       {/* Action Cards List */}

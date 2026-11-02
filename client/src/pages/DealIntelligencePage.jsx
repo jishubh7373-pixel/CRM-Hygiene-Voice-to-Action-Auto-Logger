@@ -155,49 +155,53 @@ const DealIntelligencePage = () => {
 
       {/* Filter Toolbar */}
       <div className="card filter-toolbar">
-        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', flex: 1, minWidth: 240, position: 'relative' }}>
+        <form onSubmit={handleSearchSubmit} className="filter-search">
+          <Search size={16} className="filter-group-icon" />
           <input
             type="text"
             placeholder="Search deals or accounts..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            style={{ paddingLeft: '2.4rem' }}
-          />
-          <Search
-            size={16}
-            style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }}
           />
         </form>
 
-        <select
-          value={stageFilter}
-          onChange={(e) => setStageFilter(e.target.value)}
-          style={{ width: 'auto', minWidth: 140 }}
-        >
-          <option value="">All Stages</option>
-          <option value="discovery">Discovery</option>
-          <option value="qualification">Qualification</option>
-          <option value="demo">Demo</option>
-          <option value="proposal">Proposal</option>
-          <option value="negotiation">Negotiation</option>
-          <option value="closed_won">Closed Won</option>
-          <option value="closed_lost">Closed Lost</option>
-        </select>
+        <div className="filter-group">
+          <select
+            value={stageFilter}
+            onChange={(e) => setStageFilter(e.target.value)}
+            className="filter-select"
+            aria-label="Filter by stage"
+          >
+            <option value="">All Stages</option>
+            <option value="discovery">Discovery</option>
+            <option value="qualification">Qualification</option>
+            <option value="demo">Demo</option>
+            <option value="proposal">Proposal</option>
+            <option value="negotiation">Negotiation</option>
+            <option value="closed_won">Closed Won</option>
+            <option value="closed_lost">Closed Lost</option>
+          </select>
+        </div>
 
-        <select
-          value={hygieneFilter}
-          onChange={(e) => setHygieneFilter(e.target.value)}
-          style={{ width: 'auto', minWidth: 150 }}
-        >
-          <option value="">All Hygiene States</option>
-          <option value="healthy">Healthy Only</option>
-          <option value="at_risk">At Risk Only</option>
-          <option value="stale">Stale Only</option>
-        </select>
+        <div className="filter-group">
+          <select
+            value={hygieneFilter}
+            onChange={(e) => setHygieneFilter(e.target.value)}
+            className="filter-select"
+            aria-label="Filter by hygiene state"
+          >
+            <option value="">All Hygiene States</option>
+            <option value="healthy">Healthy Only</option>
+            <option value="at_risk">At Risk Only</option>
+            <option value="stale">Stale Only</option>
+          </select>
+        </div>
 
-        <button onClick={fetchDeals} className="btn btn-secondary btn-sm" title="Refresh">
-          <RefreshCw size={14} />
-        </button>
+        <div className="filter-actions">
+          <button onClick={fetchDeals} className="btn btn-secondary btn-sm" title="Refresh">
+            <RefreshCw size={14} />
+          </button>
+        </div>
       </div>
 
       {/* Deals Table */}
