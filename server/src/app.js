@@ -36,8 +36,8 @@ app.use(
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, server-to-server) or matching clientUrl
-      if (!origin || origin === config.clientUrl || origin.startsWith('http://localhost:')) {
+      const normalizedOrigin = origin ? origin.replace(/\/+$/, '') : '';
+      if (!origin || normalizedOrigin === config.clientUrl || origin.startsWith('http://localhost:')) {
         callback(null, true);
       } else if (config.env === 'production') {
         callback(new AppError('CORS origin blocked by policy.', 403, 'CORS_REJECTED'));

@@ -6,7 +6,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 const config = {
   env: process.env.NODE_ENV || 'development',
   port: parseInt(process.env.PORT || '5000', 10),
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
+  clientUrl: (process.env.CLIENT_URL || 'http://localhost:5173').replace(/\/+$/, ''),
   mongo: {
     uri: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/dealflow_ai',
   },
