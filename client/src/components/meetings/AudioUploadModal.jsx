@@ -353,7 +353,7 @@ const AudioUploadModal = ({ isOpen, onClose, onSuccess, initialTab = 'file' }) =
         </div>
 
         {/* Client & Email */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <div className="responsive-grid-2col">
           <div>
             <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
               Client / Account Name *
@@ -380,7 +380,7 @@ const AudioUploadModal = ({ isOpen, onClose, onSuccess, initialTab = 'file' }) =
         </div>
 
         {/* Associate Deal & Date */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <div className="responsive-grid-2col">
           <div>
             <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
               Associate with CRM Deal (Optional)

@@ -261,8 +261,8 @@ const MeetingDetailsPage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Top Breadcrumb & Actions Bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      <div className="page-header-container">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           <Link to="/meetings" className="btn btn-secondary btn-sm" title="Back to Meetings">
             <ArrowLeft size={15} /> Back
           </Link>
@@ -328,7 +328,7 @@ const MeetingDetailsPage = () => {
         </div>
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+        <div className="page-header-actions">
           <button
             onClick={() => setIsReviewModalOpen(true)}
             className="btn btn-secondary btn-sm"
@@ -472,13 +472,9 @@ const MeetingDetailsPage = () => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         {/* Navigation Tabs Bar */}
         <div
+          className="tabs-scroll-container"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.35rem',
             borderBottom: '1px solid var(--border-light)',
-            overflowX: 'auto',
-            paddingBottom: '0.2rem',
           }}
         >
           {TABS.map((tab) => {

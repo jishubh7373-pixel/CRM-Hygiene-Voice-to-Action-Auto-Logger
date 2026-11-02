@@ -262,7 +262,7 @@ const ApprovalCenterPage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="page-header-container">
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
@@ -289,7 +289,7 @@ const ApprovalCenterPage = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div className="page-header-actions">
           {user?.role === 'admin' && (
             <button onClick={() => setSettingsModalOpen(true)} className="btn btn-secondary btn-sm">
               <Settings size={14} /> Automation Settings
@@ -327,7 +327,7 @@ const ApprovalCenterPage = () => {
       )}
 
       {/* Tabs */}
-      <div style={{ display: 'flex', borderBottom: '1px solid var(--border-subtle)', gap: '0.5rem', overflowX: 'auto' }}>
+      <div className="tabs-scroll-container" style={{ borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.5rem' }}>
         {[
           { id: 'pending_approval', label: `Pending Approval (${counts.pending})` },
           { id: 'approved', label: `Approved & Ready (${counts.approved})` },
@@ -359,18 +359,7 @@ const ApprovalCenterPage = () => {
       </div>
 
       {/* Filter Bar */}
-      <div
-        style={{
-          display: 'flex',
-          gap: '1rem',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          background: 'var(--bg-card)',
-          padding: '0.85rem 1.25rem',
-          borderRadius: 'var(--radius-sm)',
-          border: '1px solid var(--border-subtle)',
-        }}
-      >
+      <div className="card filter-toolbar">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '220px' }}>
           <Search size={15} style={{ color: 'var(--text-dim)' }} />
           <input

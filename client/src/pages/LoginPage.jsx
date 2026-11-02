@@ -35,6 +35,7 @@ const LoginPage = () => {
 
   return (
     <div
+      className="login-page-wrapper"
       style={{
         minHeight: '100vh',
         background: 'radial-gradient(ellipse at top, #161f36 0%, #090d16 70%)',
@@ -161,12 +162,12 @@ const LoginPage = () => {
                 Quick Demo Access (Phase 1 Seed)
               </span>
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button
                 type="button"
                 onClick={() => handleFillDemo('admin@acmecloud.com', 'Password123!')}
                 className="btn btn-secondary btn-sm"
-                style={{ flex: 1, fontSize: '0.75rem' }}
+                style={{ flex: '1 1 90px', fontSize: '0.75rem' }}
               >
                 Admin (Acme)
               </button>
@@ -174,7 +175,7 @@ const LoginPage = () => {
                 type="button"
                 onClick={() => handleFillDemo('sarah.rep@acmecloud.com', 'Password123!')}
                 className="btn btn-secondary btn-sm"
-                style={{ flex: 1, fontSize: '0.75rem' }}
+                style={{ flex: '1 1 90px', fontSize: '0.75rem' }}
               >
                 Sales Rep
               </button>
@@ -182,7 +183,7 @@ const LoginPage = () => {
                 type="button"
                 onClick={() => handleFillDemo('admin@globalretail.com', 'Password123!')}
                 className="btn btn-secondary btn-sm"
-                style={{ flex: 1, fontSize: '0.75rem' }}
+                style={{ flex: '1 1 90px', fontSize: '0.75rem' }}
                 title="Log in to Tenant 2 to test cross-tenant data isolation"
               >
                 Tenant 2

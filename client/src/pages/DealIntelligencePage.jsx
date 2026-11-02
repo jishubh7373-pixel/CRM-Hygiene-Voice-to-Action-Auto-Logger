@@ -138,7 +138,7 @@ const DealIntelligencePage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="page-header-container">
         <div>
           <h2 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em', margin: 0 }}>
             Deal Intelligence & Pipeline Hygiene
@@ -154,7 +154,7 @@ const DealIntelligencePage = () => {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+      <div className="card filter-toolbar">
         <form onSubmit={handleSearchSubmit} style={{ display: 'flex', flex: 1, minWidth: 240, position: 'relative' }}>
           <input
             type="text"
@@ -548,7 +548,7 @@ const DealIntelligencePage = () => {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
                 Account / Client Name *
@@ -576,7 +576,7 @@ const DealIntelligencePage = () => {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
                 Initial Pipeline Stage

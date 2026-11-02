@@ -441,7 +441,7 @@ const LiveAudioRecorder = ({ onSuccess, onCancel, deals = [] }) => {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.85rem' }}>
+          <div className="responsive-grid-2col">
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
                 Client / Account Name
@@ -468,7 +468,7 @@ const LiveAudioRecorder = ({ onSuccess, onCancel, deals = [] }) => {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.85rem' }}>
+          <div className="responsive-grid-2col">
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
                 Link to CRM Deal

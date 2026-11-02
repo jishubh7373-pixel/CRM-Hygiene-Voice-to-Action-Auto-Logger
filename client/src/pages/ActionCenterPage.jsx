@@ -135,7 +135,7 @@ const ActionCenterPage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="page-header-container">
         <div>
           <h2 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em', margin: 0 }}>
             Action Center & Commitments
@@ -151,7 +151,7 @@ const ActionCenterPage = () => {
       </div>
 
       {/* Filter Bar */}
-      <div className="card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+      <div className="card filter-toolbar">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Filter size={16} style={{ color: 'var(--text-dim)' }} />
           <select
@@ -216,13 +216,8 @@ const ActionCenterPage = () => {
             return (
               <div
                 key={item._id}
-                className="card"
+                className="card action-card-row"
                 style={{
-                  padding: '1.25rem',
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',
-                  gap: '1rem',
                   opacity: item.status === 'completed' ? 0.65 : 1,
                   borderLeft:
                     item.priority === 'urgent'
@@ -320,7 +315,7 @@ const ActionCenterPage = () => {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="action-card-actions">
                   {item.crmSyncStatus !== 'synced' && item.status !== 'completed' && (
                     <button
                       onClick={() => handleSyncToCrm(item)}
@@ -404,7 +399,7 @@ const ActionCenterPage = () => {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2col">
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
                 Priority

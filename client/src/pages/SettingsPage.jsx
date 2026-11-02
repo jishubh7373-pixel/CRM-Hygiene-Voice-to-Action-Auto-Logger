@@ -100,7 +100,7 @@ const SettingsPage = () => {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.5rem' }}>
+      <div className="tabs-scroll-container" style={{ borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.5rem' }}>
         <button
           onClick={() => setActiveTab('organization')}
           className={`btn btn-sm ${activeTab === 'organization' ? 'btn-primary' : 'btn-secondary'}`}
@@ -139,7 +139,7 @@ const SettingsPage = () => {
                 <Badge variant="primary">{org?.plan || 'Professional'} Tier</Badge>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+              <div className="responsive-grid-2col">
                 <div>
                   <label style={{ display: 'block', fontSize: '0.785rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
                     Organization Name

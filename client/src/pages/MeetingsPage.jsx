@@ -151,7 +151,7 @@ const MeetingsPage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="page-header-container">
         <div>
           <h2 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em', margin: 0 }}>
             Voice Meetings & Intelligence
@@ -161,7 +161,7 @@ const MeetingsPage = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+        <div className="page-header-actions">
           <button onClick={() => setIsLogModalOpen(true)} className="btn btn-secondary">
             <Plus size={16} /> Log Call Note
           </button>
@@ -188,7 +188,7 @@ const MeetingsPage = () => {
       </div>
 
       {/* Filters Bar */}
-      <div className="card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+      <div className="card filter-toolbar">
         <form onSubmit={handleSearchSubmit} style={{ display: 'flex', flex: 1, minWidth: 260, position: 'relative' }}>
           <input
             type="text"

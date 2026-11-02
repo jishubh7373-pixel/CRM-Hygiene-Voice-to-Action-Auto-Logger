@@ -14,6 +14,7 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = 540 }) => {
 
   return (
     <div
+      className="modal-backdrop-container"
       style={{
         position: 'fixed',
         inset: 0,
@@ -28,7 +29,7 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = 540 }) => {
       onClick={onClose}
     >
       <div
-        className="card"
+        className="card modal-card"
         style={{
           width: '100%',
           maxWidth: `${maxWidth}px`,
