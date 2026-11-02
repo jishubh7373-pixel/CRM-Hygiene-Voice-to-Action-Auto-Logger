@@ -1,0 +1,34 @@
+# ==========================================
+# DealFlow AI — Background Queue Worker Dockerfile
+# Standalone Linux Service for BullMQ Pipeline
+# ==========================================
+
+FROM node:20-alpine AS dependencies
+WORKDIR /app
+
+RUN apk add --no-cache python3 make g++
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+RUN apk add --no-cache dumb-init
+
+RUN addgroup -g 1001 -S dealflow && \
+    adduser -u 1001 -S dealflow -G dealflow
+
+COPY --chown=dealflow:dealflow --from=dependencies /app/node_modules ./node_modules
+COPY --chown=dealflow:dealflow package*.json ./
+COPY --chown=dealflow:dealflow worker.js ./
+COPY --chown=dealflow:dealflow src/ ./src/
+
+RUN mkdir -p /app/uploads/audio && chown -R dealflow:dealflow /app/uploads
+
+USER dealflow
+
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node", "worker.js"]

@@ -1,0 +1,98 @@
+name: DealFlow AI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, staging ]
+  pull_request:
+    branches: [ main, staging ]
+
+jobs:
+  test-backend:
+    name: Backend Test Suite & Security Checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+
+    strategy:
+      matrix:
+        node-version: [ 20.x, 22.x ]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install Server Dependencies
+        run: npm ci
+
+      - name: Run Jest Test Suite (Multi-Tenant & Security Verification)
+        run: npm test
+        env:
+          NODE_ENV: test
+          MONGOMS_MD5_CHECK: '0'
+
+  build-frontend:
+    name: Frontend Build & Code-Splitting Verification
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install Client Dependencies
+        run: npm ci
+
+      - name: Build Vite Production Assets
+        run: npm run build
+
+  docker-build:
+    name: Container Build & Verification
+    runs-on: ubuntu-latest
+    needs: [ test-backend, build-frontend ]
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: actions/docker/setup-buildx-action@v3
+
+      - name: Build Backend API Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server
+          file: ./server/Dockerfile
+          push: false
+          tags: dealflow-api:ci
+
+      - name: Build Background Worker Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server
+          file: ./server/Dockerfile.worker
+          push: false
+          tags: dealflow-worker:ci
+
+      - name: Build Frontend Client Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./client
+          file: ./client/Dockerfile
+          push: false
+          tags: dealflow-client:ci

@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: dealflow-api-prod
+    restart: always
+    env_file:
+      - ./server/.env.production
+    ports:
+      - "5000:5000"
+    volumes:
+      - audio_storage_prod:/app/uploads/audio
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/ready"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - dealflow-prod-network
+
+  worker:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.worker
+    container_name: dealflow-worker-prod
+    restart: always
+    env_file:
+      - ./server/.env.production
+    volumes:
+      - audio_storage_prod:/app/uploads/audio
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+      - dealflow-prod-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: dealflow-client-prod
+    restart: always
+    networks:
+      - dealflow-prod-network
+
+  proxy:
+    image: nginx:1.25-alpine
+    container_name: dealflow-proxy-prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+      - client
+    networks:
+      - dealflow-prod-network
+
+networks:
+  dealflow-prod-network:
+    driver: bridge
+
+volumes:
+  audio_storage_prod:
